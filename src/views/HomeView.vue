@@ -1,9 +1,22 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+import NavBar from '@/components/NavBar.vue'
+import FooterBar from '@/components/FooterBar.vue'
+import ProdutosList from '@/components/ProdutosList.vue'
+
+
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <div id="app">
+    <!-- Navbar -->
+    <NavBar></NavBar>
+    <!-- Lista de Produtos -->
+    <ProdutosList />
+    <!-- Rodapé -->
+    <FooterBar />
+  </div>
 </template>
+
+<style scoped>
+
+</style>
