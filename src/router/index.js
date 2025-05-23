@@ -15,6 +15,7 @@ const router = createRouter({
       path: '/produtos',
       name: 'produtos',
       component: ProdutosView,
+      props: true,
     },
     {
       path: '/cart',

@@ -43,7 +43,6 @@
 
 #img {
   height: 100%;
-  margin-left: 15%;
 }
 
 h4 {

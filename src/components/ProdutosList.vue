@@ -295,7 +295,7 @@ onMounted(() => {
 
   .button {
     width: 80%;
-    margin: 10px auto;
+    margin: auto;
     display: block;
   }
 }

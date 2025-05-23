@@ -2,6 +2,7 @@
 import NavBar from '@/components/NavBar.vue'
 import FooterBar from '@/components/FooterBar.vue'
 import ProdutosList from '@/components/ProdutosList.vue'
+import ProductDetail from '@/components/ProductDetail.vue';
 
 
 </script>
