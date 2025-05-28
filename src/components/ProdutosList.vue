@@ -1,26 +1,23 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-const cart = ref(0)
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useCartStore } from '@/stores/cart.js'
 
-const addToCart = (product) => {
-  cart.value += 1
-  let storedCart = JSON.parse(localStorage.getItem('cart')) || []
+const cartStore = useCartStore()
+const router = useRouter()
 
-  const existingItem = storedCart.find((item) => item.id === product.id)
-
-  if (existingItem) {
-    existingItem.quantity += 1
-  } else {
-    storedCart.push({
-      id: product.id,
-      title: product.title,
-      description: product.description,
-      image: product.image,
-      quantity: 1,
-    })
+const addCart = (product) => {
+  const productAdd = {
+    id: product.id,
+    title: product.title,
+    description: product.description,
+    image: product.image,
+    inStock: product.inStock,
+    price: product.price
   }
 
-  localStorage.setItem('cart', JSON.stringify(storedCart))
+  cartStore.addCart(productAdd, 1)
+  alert(`Produto adicionado no carrinho`)
 }
 
 const products = ref([
@@ -30,6 +27,7 @@ const products = ref([
     description: 'Descrição do Produto 1',
     image: '../src/assets/images/image1.png',
     inStock: 10,
+    price: 'R$100,00',
   },
   {
     id: 2,
@@ -37,6 +35,7 @@ const products = ref([
     description: 'Descrição do Produto 2',
     image: '../src/assets/images/image2.png',
     inStock: 5,
+    price: 'R$100,00',
   },
   {
     id: 3,
@@ -44,6 +43,7 @@ const products = ref([
     description: 'Descrição do Produto 3',
     image: '../src/assets/images/image3.png',
     inStock: 0,
+    price: 'R$100,00',
   },
   {
     id: 4,
@@ -51,6 +51,7 @@ const products = ref([
     description: 'Descrição do Produto 4',
     image: '../src/assets/images/image4.png',
     inStock: 3,
+    price: 'R$100,00',
   },
   {
     id: 5,
@@ -58,6 +59,7 @@ const products = ref([
     description: 'Descrição do Produto 5',
     image: '../src/assets/images/image5.png',
     inStock: 10,
+    price: 'R$100,00',
   },
   {
     id: 6,
@@ -65,6 +67,7 @@ const products = ref([
     description: 'Descrição do Produto 6',
     image: '../src/assets/images/image6.png',
     inStock: 10,
+    price: 'R$100,00',
   },
   {
     id: 7,
@@ -72,6 +75,7 @@ const products = ref([
     description: 'Descrição do Produto 7',
     image: '../src/assets/images/image7.png',
     inStock: 10,
+    price: 'R$100,00',
   },
   {
     id: 8,
@@ -79,6 +83,7 @@ const products = ref([
     description: 'Descrição do Produto 8',
     image: '../src/assets/images/image8.jpeg',
     inStock: 10,
+    price: 'R$100,00',
   },
   {
     id: 9,
@@ -86,6 +91,7 @@ const products = ref([
     description: 'Descrição do Produto 9',
     image: '../src/assets/images/image9.jpeg',
     inStock: 10,
+    price: 'R$100,00',
   },
   {
     id: 10,
@@ -93,14 +99,13 @@ const products = ref([
     description: 'Descrição do Produto 10',
     image: '../src/assets/images/image10.jpeg',
     inStock: 10,
+    price: 'R$100,00',
   },
 ])
 
-onMounted(() => {
-  const storedCart = JSON.parse(localStorage.getItem('cart')) || []
-  const total = storedCart.reduce((sum, item) => sum + item.quantity, 0)
-  cart.value = total
-})
+const goToDetails = (id) => {
+    router.push({ name: 'details', params: { id } })
+}
 </script>
 
 <template>
@@ -122,7 +127,7 @@ onMounted(() => {
         <button
           class="button"
           :class="{ disabledButton: product.inStock < 1 }"
-          @click="addToCart(product)"
+          @click="addCart(product)"
           :disabled="product.inStock < 1"
         >
           Add to Cart

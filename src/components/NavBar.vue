@@ -1,4 +1,8 @@
-<script setup></script>
+<script setup>
+   import { useCartStore } from '@/stores/cart.js'
+
+const cartStore = useCartStore()
+</script>
 
 <template>
   <div class="container-nav">
@@ -8,18 +12,20 @@
     <div>
       <router-link to="/produtos"><a id="a">Produtos</a></router-link>
     </div>
-    <div class="cart-area">
+    <div class="cart-area"
+    ><router-link to="/cart">
       <a href="cart.html">
         <img
           src="https://static.vecteezy.com/system/resources/previews/017/196/580/large_2x/shopping-cart-icon-on-transparent-background-free-png.png"
           alt="Carrinho"
           class="cart-img"
         />
-        <router-link to="cart"
-          ><span class="cart-badge" v-if="cart > 0">{{ cart }}</span></router-link
-        >
       </a>
-    </div>
+        <div class="cart-badge">
+            <span>{{ cartStore.totalItems }}</span>
+        </div>
+    </router-link>
+  </div>
   </div>
 </template>
 
