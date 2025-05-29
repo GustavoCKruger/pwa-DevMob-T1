@@ -10,7 +10,7 @@ const cartStore = useCartStore()
       <img src="@/assets/images/South.jpg" alt="Logo" class="img" />
     </div>
     <div>
-      <router-link to="/produtos"><a id="a">Produtos</a></router-link>
+      <router-link to="/"><a id="a">Produtos</a></router-link>
     </div>
     <div class="cart-area"
     ><router-link to="/cart">

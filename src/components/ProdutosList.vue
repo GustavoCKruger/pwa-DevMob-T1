@@ -112,13 +112,14 @@ const goToDetails = (id) => {
   <div id="container">
     <div class="product-display">
       <div class="product-container" v-for="product in products" :key="product.id">
-        <a :href="'product.html?id=' + product.id" style="text-decoration: none">
+        <a style="text-decoration: none" @click="goToDetails(product.id)">
           <div class="product-image">
             <img :src="product.image" :alt="product.title" />
           </div>
           <div class="product-info">
             <h1>{{ product.title }}</h1>
             <p>{{ product.description }}</p>
+            <p>{{ product.price }}</p>
           </div>
         </a>
         <p v-if="product.inStock >= 10">In Stock</p>
@@ -159,7 +160,7 @@ const goToDetails = (id) => {
   transition:
     transform 0.3s,
     box-shadow 0.3s;
-  height: 450px;
+  height: 500px;
 }
 
 .product-container:hover {

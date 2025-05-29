@@ -92,17 +92,17 @@ const products = ref([
 ])
 
 const getProductById = (id) => {
-  return allProducts.find((product) => product.id === id)
+  return products.value.find((product) => product.id === id)
 }
 
-const addToCart = () => {
+const addCart = () => {
 const productToAdd = {
   id: product.value.id,
   title: product.value.title,
   image: product.value.image,
   price: product.value.price,
 }
-  cartStore.addToCart(productToAdd, quantity.value)
+  cartStore.addCart(productToAdd, quantity.value)
   alert('Produto adicionado ao carrinho 🛒✅!')
 }
 
@@ -135,9 +135,33 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="produto">
-    <h1>{{ title }}</h1>
-    <a> {{ image }}</a>
+ <div v-if="product" class="details-product">
+    <img :src="product.image" alt="Produto" class="details-img" />
+    <div class="details-items">
+      <h1 class="details-name">{{ product.title }}</h1>
+      <p class="details-price">{{ product.price }}</p>
+      <div class="quantity-control">
+        <span>Quantidade</span>
+        <button class="quantity-button" @click="diminuir" :disabled="quantity <= 0">−</button>
+        <span class="quantity-value">{{ quantity }}</span>
+        <button class="quantity-button" @click="aumentar" :disabled="quantity >= product.inStock">+</button>
+      </div>
+      <div class="container-button">
+        <button
+          class="button"
+          style="margin: 5px"
+          :class="{ disabledButton: product.inStock < 1 }"
+          @click="addCart(product)"
+          :disabled="product.inStock < 1"
+        >
+          <img
+          
+            alt="cart"
+          />
+        </button>
+        <button style="margin: 5px" class="button" @click="confirmBuy">Buy Now</button>
+      </div>
+    </div>
   </div>
 </template>
 
