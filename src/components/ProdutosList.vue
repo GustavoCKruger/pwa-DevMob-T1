@@ -20,12 +20,13 @@ const addCart = (product) => {
   alert(`Produto adicionado no carrinho`)
 }
 
+
 const products = ref([
   {
     id: 1,
     title: 'Produto 1',
     description: 'Descrição do Produto 1',
-    image: '@/assets/images/image1.png',
+    image: 'image1.png',
     inStock: 10,
     price: 'R$100,00',
   },
@@ -103,6 +104,9 @@ const products = ref([
   },
 ])
 
+const getImage = (img) =>
+  new URL(`../assets/images/${img}`, import.meta.url).href
+
 const goToDetails = (id) => {
     router.push({ name: 'details', params: { id } })
 }
@@ -114,7 +118,7 @@ const goToDetails = (id) => {
       <div class="product-container" v-for="product in products" :key="product.id">
         <a style="text-decoration: none" @click="goToDetails(product.id)">
           <div class="product-image">
-            <img :src="product.image" :alt="product.title" />
+            <img :src="getImage(product.image)" :alt="product.title" />
           </div>
           <div class="product-info">
             <h1>{{ product.title }}</h1>

@@ -41,6 +41,7 @@ export default defineConfig({
         enabled: true,
       },
     }),
+    
   ],
   resolve: {
     alias: {
@@ -48,3 +49,5 @@ export default defineConfig({
     },
   },
 });
+
+
