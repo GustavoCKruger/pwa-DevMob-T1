@@ -25,7 +25,7 @@ const products = ref([
     id: 1,
     title: 'Produto 1',
     description: 'Descrição do Produto 1',
-    image: '../src/assets/images/image1.png',
+    image: '@/assets/images/image1.png',
     inStock: 10,
     price: 'R$100,00',
   },
