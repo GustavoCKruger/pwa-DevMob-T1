@@ -1,7 +1,5 @@
 <script setup>
 import { watch, onMounted, computed } from 'vue'
-import NavBar from '@/components/NavBar.vue'
-import FooterBar from '@/components/FooterBar.vue'
 import { useCartStore } from '@/stores/cart'
 
 const cartStore = useCartStore()
@@ -58,6 +56,9 @@ const confirmBuy = () => {
     alert('Compra realizada com sucesso! ✅')
     cartStore.clearCart()
 }
+
+const getImage = (img) =>
+  new URL(`../assets/images/${img}`, import.meta.url).href
 </script>
 
 <template>
@@ -78,7 +79,7 @@ const confirmBuy = () => {
                 <tbody>
                     <tr v-for="item in cart" :key="item.id">
                         <td data-label="Produto">
-                            <img :src="item.image" alt="Produto" class="cart-image" />
+                            <img :src="getImage(item.image)" alt="Produto" class="cart-image" />
                             {{ item.title }}
                         </td>
                         <td data-label="Quantidade">
